@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 
     def index
-        @articles = Article.all
+        @articles = Article.all 
     end
     def new 
         @article = Article.new
@@ -16,6 +16,13 @@ class ArticlesController < ApplicationController
         else
             render 'new'
         end
+    end
+
+    def destroy
+        @article = Article.find(params[:id])
+        @article.destroy
+        flash[:notice] = "Article was destroyed"
+        redirect_to articles_path
     end
 
     def show
@@ -36,6 +43,9 @@ class ArticlesController < ApplicationController
             render 'edit'
         end
     end
+
+
+  
     private
 
     def article_params
